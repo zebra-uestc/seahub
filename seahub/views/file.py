@@ -1099,16 +1099,11 @@ def file_edit_submit(request, repo_id):
         remove_tmp_file()
         return error_json(str(e))
 
-@login_required
-def file_edit(request, repo_id):
+def _file_edit(request, repo_id, path):
     repo = get_repo(repo_id)
     if not repo:
         raise Http404
 
-    if request.method == 'POST':
-        return file_edit_submit(request, repo_id)
-
-    path = request.GET.get('p', '/')
     if path[-1] == '/':
         path = path[:-1]
     u_filename = os.path.basename(path)
@@ -1182,6 +1177,18 @@ def file_edit(request, repo_id):
         'gid': gid,
         'cancel_url': cancel_url,
     }, context_instance=RequestContext(request))
+
+@login_required
+def file_edit(request, repo_id):
+    if request.method == 'POST':
+        return file_edit_submit(request, repo_id)
+
+    path = request.GET.get('p', '/')
+    return _file_edit(request, repo_id, path)
+
+@login_required
+def file_edit_v2(request, repo_id, path):
+    return _file_edit(request, repo_id, path)
 
 @login_required
 def view_raw_file(request, repo_id, file_path):

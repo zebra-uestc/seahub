@@ -7,7 +7,7 @@ from seahub.views import *
 from seahub.views.file import view_repo_file, view_history_file, view_trash_file,\
     view_snapshot_file, file_edit, view_shared_file, view_file_via_shared_dir,\
     text_diff, view_raw_file, view_raw_shared_file, \
-    download_file, view_lib_file, file_access
+    download_file, view_lib_file, file_access, file_edit_v2
 from seahub.views.repo import repo_history_view, view_shared_dir, \
     view_shared_upload_link
 from notifications.views import notification_list
@@ -95,6 +95,7 @@ urlpatterns = patterns(
     ### lib (replace the old `repo` urls) ###
     # url(r'^lib/(?P<repo_id>[-0-9a-f]{36})/dir/(?P<path>.*)$', view_lib_dir, name='view_lib_dir'),
     url(r'^lib/(?P<repo_id>[-0-9a-f]{36})/file(?P<path>.*)$', view_lib_file, name='view_lib_file'),
+    url(r'^lib/(?P<repo_id>[-0-9a-f]{36})/edit(?P<path>.*)$', file_edit_v2, name='file_edit_v2'),
     url(r'^#common/lib/(?P<repo_id>[-0-9a-f]{36})/(?P<path>.*)$', fake_view, name='view_common_lib_dir'),
     url(r'^#group/(?P<group_id>\d+)/$', fake_view, name='group_info'),
     url(r'^#group/(?P<group_id>\d+)/members/$', fake_view, name='group_members'),
