@@ -16,13 +16,13 @@ import seaserv
 from seaserv import seafile_api, ccnet_api
 from seahub.base.models import CommandsLastCheck
 from seahub.notifications.models import UserNotification
-from seahub.utils import send_html_email, get_service_url, \
-    get_site_scheme_and_netloc
+from seahub.utils import get_site_scheme_and_netloc
 import seahub.settings as settings
 from seahub.avatar.templatetags.avatar_tags import avatar
 from seahub.avatar.util import get_default_avatar_url
 from seahub.base.templatetags.seahub_tags import email2nickname
 from seahub.profile.models import Profile
+from seahub.utils.mail import send_html_email_with_dj_template, MAIL_PRIORITY
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -215,7 +215,7 @@ class Command(BaseCommand):
 
             notices = []
             for notice in unseen_notices:
-                logger.info('Processing unseen notice: [%s]' % (notice))
+                logger.debug('Processing unseen notice: [%s]' % (notice))
 
                 d = json.loads(notice.detail)
 
@@ -271,9 +271,12 @@ class Command(BaseCommand):
                 }
 
             try:
-                send_html_email(_('New notice on %s') % settings.SITE_NAME,
-                                'notifications/notice_email.html', c,
-                                None, [to_user])
+                send_html_email_with_dj_template(
+                    to_user, dj_template='notifications/notice_email.html',
+                    subject=_('New notice on %s') % settings.SITE_NAME,
+                    context=c,
+                    priority=MAIL_PRIORITY.now
+                )
 
                 logger.info('Successfully sent email to %s' % to_user)
                 self.stdout.write('[%s] Successfully sent email to %s' % (str(datetime.datetime.now()), to_user))
