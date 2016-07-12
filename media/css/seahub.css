@@ -3561,3 +3561,8 @@ img.thumbnail {
     padding-top: 20px;
     text-align: center;
 }
+
+/* TODO need to update this class */
+.tick-yes {
+    color:green;
+}
