@@ -16,7 +16,8 @@
                 <th width="52%">{% trans "Description"%}</th>
                 <th width="15%">{% trans "Time" %}</th>
                 <th width="15%">{% trans "Modifier"%}</th>
-                <th width="18%">{% trans "Operations" %}</th>
+                <th width="10%">{% trans "Device"%}</th>
+                <th width="8%">{% trans "Operations" %}</th>
             </tr>
 
             {% for commit in commits %}
@@ -38,6 +39,13 @@
                     {% endif %}
                 {% else %}
                     {% trans "Unknown"%}
+                {% endif %}
+                </td>
+                <td>
+                {% if commit.device_name %}
+                    {{ commit.device_name }}
+                {% else %}
+                    --
                 {% endif %}
                 </td>
                 <td>
