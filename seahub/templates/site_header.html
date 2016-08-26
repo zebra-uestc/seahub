@@ -7,13 +7,8 @@
             {% block notice_panel %}{% endblock %}
             <td class="mui--appbar-height">
                 <a href="{{ SITE_ROOT }}" id="logo">
-                    {% if seacloud_mode %}
-                        <img src="{{ MEDIA_URL }}img/seacloud_logo.png?t=1469261582" title="Seacloud" alt="logo"
-                             width="186" height="31"/>
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}{{ logo_path }}" title="Seafile" alt="logo" width="{{ logo_width }}"
-                             height="{{ logo_height }}"/>
-                    {% endif %}
+                    <img src="{{ MEDIA_URL }}img/nebularbox.png" title="Seafile" alt="logo" width="{{ logo_width }}"
+                         height="{{ logo_height }}"/>
                 </a>
             </td>
             {% block nav %}{% endblock %}
