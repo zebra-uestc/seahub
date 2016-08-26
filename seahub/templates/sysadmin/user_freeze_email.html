@@ -4,16 +4,17 @@
 
 {% block email_con %}
 
-{% autoescape off %}
+    {% autoescape off %}
 
-<p style="color:#121214;font-size:14px;">{% trans "Hi," %}</p>
+        <p style="color:#121214;font-size:14px;">{% trans "Hi," %}</p>
 
-<p style="font-size:14px;color:#434144;">
-{% blocktrans %}Account {{ user }} froze due to excessive failed logins. Please check at:{% endblocktrans%}
-</p>
+        <p style="font-size:14px;color:#434144;">
+            {% blocktrans %}Account {{ user }} froze due to excessive failed logins. Please check at:{% endblocktrans %}
+        </p>
 
-<a href="{{ url_base }}{% url 'user_search' %}?email={{user|urlencode}}" target="_blank">{{ url_base }}{% url 'user_search' %}?email={{user|urlencode}}</a>
+        <a href="{{ url_base }}{% url 'user_search' %}?email={{ user|urlencode }}" target="_blank">
+            {{ url_base }}{% url 'user_search' %}?email={{ user|urlencode }}</a>
 
-{% endautoescape %}
+    {% endautoescape %}
 
 {% endblock %}

@@ -1,0 +1,71 @@
+{% load seahub_tags avatar_tags group_avatar_tags i18n staticfiles %}
+{% load url from future %}
+
+<div class="mui-appbar">
+    <table width="100%" style="margin: 0">
+        <tr style="vertical-align:middle;">
+            {% block notice_panel %}{% endblock %}
+            <td class="mui--appbar-height">
+                <a href="{{ SITE_ROOT }}" id="logo">
+                    {% if seacloud_mode %}
+                        <img src="{{ MEDIA_URL }}img/seacloud_logo.png?t=1469261582" title="Seacloud" alt="logo"
+                             width="186" height="31"/>
+                    {% else %}
+                        <img src="{{ MEDIA_URL }}{{ logo_path }}" title="Seafile" alt="logo" width="{{ logo_width }}"
+                             height="{{ logo_height }}"/>
+                    {% endif %}
+                </a>
+            </td>
+            {% block nav %}{% endblock %}
+            <td class="mui--appbar-height" align="right">
+                {% block header_right %}
+                    {% if request.user.is_authenticated %}
+                        {% if has_file_search %}
+                            {% include 'snippets/search_form.html' %}
+                        {% endif %}
+                        <div class="mui-dropdown">
+                            <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
+                                {% avatar request.user 36 %}
+                                <span class="mui-caret"></span>
+                            </button>
+                            <ul class="mui-dropdown__menu mui-dropdown__menu--right">
+                                <li><a href="#">{{ request.user.username|email2nickname }}
+                                    ( {{ request.user.username|email2contact_email }} )</a></li>
+                                <a id="space-traffic" data-url="{% url 'space_and_traffic' %}"></a>
+                                <li><a href="{{ SITE_ROOT }}profile/">{% trans "Settings" %}</a></li>
+                                <li><a href="{{ SITE_ROOT }}accounts/logout/" id="logout">{% trans "Log out" %}</a></li>
+                            </ul>
+                        </div>
+                        {% if request.user.is_staff %}
+                            {% block sys_admin %}<a href="{% url 'sys_useradmin' %}"
+                                                    class="mui-btn mui-btn--primary">{% trans "System Admin" %}</a>
+                            {% endblock %}
+                        {% endif %}
+                        {% if request.user.org and request.user.org.is_staff %}
+                            {% block org_admin %}<a href="{% url 'org_user_admin' %}"
+                                                    class="mui-btn mui-btn--primary">{% trans "Admin" %}</a>
+                            {% endblock %}
+                        {% endif %}
+                        {% if request.user.inst_admin %}
+                            {% block inst_admin %}<a href="{% url "institutions:useradmin" %}"
+                                                     class="mui-btn mui-btn--primary">{% trans "Admin" %}</a>
+                            {% endblock %}
+                        {% endif %}
+                    {% else %} {# for non-logged-in user #}
+                        <div class="mui-dropdown">
+                            <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
+                                {{ LANGUAGE_CODE|language_name_local }}
+                                <span class="mui-caret"></span>
+                            </button>
+                            <ul class="mui-dropdown__menu mui-dropdown__menu--right">
+                                {% for LANG in LANGUAGES %}
+                                    <li><a href="{% url 'i18n' %}?lang={{ LANG.0 }}">{{ LANG.1 }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </td>
+        </tr>
+    </table>
+</div>

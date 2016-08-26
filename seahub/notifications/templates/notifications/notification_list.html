@@ -4,9 +4,9 @@
 {% block cur_notice %}tab-cur{% endblock %}
 
 {% block right_panel %}
-<div class="hd ovhd">
-    <h3 class="fleft">{% trans "All Notifications" %}</h3>
-    <button id="add-n" class="fright btn-white">{% trans "Add new notification" %}</button>
+<div class="mui-panel">
+    <button id="add-n" class="fright mui-btn">{% trans "Add new notification" %}</button>
+    <h3>{% trans "All Notifications" %}</h3>
 </div>
 <form action="{% url 'notification_add' %}" method="post" class="hide" id="add-n-form">{% csrf_token %}
     <h3>{% trans "Add new notification" %}</h3>
@@ -44,7 +44,7 @@
 <script type="text/javascript">
 $('#add-n').click(function() {
     $('#add-n-form').modal();
-    $('#simplemodal-container').css({'height':'auto'});
+    $('#simplemodal-container').css({'height':'auto', 'padding': '20px', 'width': '400px'});
     return false;
 });
 addConfirmTo($('.note-delete-btn'), {

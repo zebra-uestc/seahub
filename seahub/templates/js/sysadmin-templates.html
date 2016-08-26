@@ -6,12 +6,14 @@
         <li class="tab <% if (cur_tab == 'dashboard') { %> tab-cur<% } %>">
             <a href="{{ SITE_ROOT }}sysadmin/#dashboard/"><span class="sf2-icon-wrench"></span>{% trans "Info" %}</a>
         </li>
-        <li class="tab <% if (cur_tab == 'devices') { %> tab-cur<% } %>"> <a href="{{ SITE_ROOT }}sysadmin/#desktop-devices/"><span class="sf2-icon-monitor"></span>{% trans "Devices" %}</a>
+        <li class="tab <% if (cur_tab == 'devices') { %> tab-cur<% } %>"><a
+                href="{{ SITE_ROOT }}sysadmin/#desktop-devices/"><span
+                class="sf2-icon-monitor"></span>{% trans "Devices" %}</a>
         </li>
         {% if constance_enabled %}
-        <li class="tab">
-            <a href="{% url "sys_settings" %}"><span class="sf2-icon-cog2"></span>{% trans "Settings" %}</a>
-        </li>
+            <li class="tab">
+                <a href="{% url "sys_settings" %}"><span class="sf2-icon-cog2"></span>{% trans "Settings" %}</a>
+            </li>
         {% endif %}
         <li class="tab">
             <a href="{{ SITE_ROOT }}sys/seafadmin/"><span class="sf2-icon-library"></span>{% trans "Libraries" %}</a>
@@ -23,37 +25,42 @@
             <a href="{{ SITE_ROOT }}sys/groupadmin/"><span class="sf2-icon-group"></span>{% trans "Groups" %}</a>
         </li>
         {% if multi_tenancy %}
-        <li class="tab">
-            <a href="{{ SITE_ROOT }}sys/orgadmin/"><span class="sf2-icon-organization"></span>{% trans "Organizations" %}</a>
-        </li>
+            <li class="tab">
+                <a href="{{ SITE_ROOT }}sys/orgadmin/"><span
+                        class="sf2-icon-organization"></span>{% trans "Organizations" %}</a>
+            </li>
         {% endif %}
 
         {% if multi_institution %}
-        <li class="tab">
-            <a href="{{ SITE_ROOT }}sys/instadmin/"><span class="sf2-icon-organization"></span>{% trans "Institutions" %}</a>
-        </li>
+            <li class="tab">
+                <a href="{{ SITE_ROOT }}sys/instadmin/"><span
+                        class="sf2-icon-organization"></span>{% trans "Institutions" %}</a>
+            </li>
         {% endif %}
 
         <li class="tab">
-            <a href="{{ SITE_ROOT }}sys/notificationadmin/"><span class="sf2-icon-msgs"></span>{% trans "Notifications" %}</a>
+            <a href="{{ SITE_ROOT }}sys/notificationadmin/"><span
+                    class="sf2-icon-msgs"></span>{% trans "Notifications" %}</a>
         </li>
         <li class="tab">
             <a href="{{ SITE_ROOT }}sys/publinkadmin/"><span class="sf2-icon-link"></span>{% trans "Links" %}</a>
         </li>
         {% if traffic_stats_enabled %}
-        <li class="tab">
-            <a href="{{ SITE_ROOT }}sys/trafficadmin/"><span class="sf2-icon-histogram"></span>{% trans "Traffic" %}</a>
-        </li>
+            <li class="tab">
+                <a href="{{ SITE_ROOT }}sys/trafficadmin/"><span class="sf2-icon-histogram"></span>{% trans "Traffic" %}
+                </a>
+            </li>
         {% endif %}
         {% if sysadmin_extra_enabled %}
-        <li class="tab">
-            <a href="{{ SITE_ROOT }}sys/loginadmin/"><span class="sf2-icon-clock"></span>{% trans "Logs" %}</a>
-        </li>
+            <li class="tab">
+                <a href="{{ SITE_ROOT }}sys/loginadmin/"><span class="sf2-icon-clock"></span>{% trans "Logs" %}</a>
+            </li>
         {% endif %}
         {% if events_enabled %}
-        <li class="tab">
-            <a href="{{ SITE_ROOT }}sys/virus_scan_records/"><span class="sf2-icon-security"></span>{% trans "Virus Scan" %}</a>
-        </li>
+            <li class="tab">
+                <a href="{{ SITE_ROOT }}sys/virus_scan_records/"><span
+                        class="sf2-icon-security"></span>{% trans "Virus Scan" %}</a>
+            </li>
         {% endif %}
     </ul>
 </script>
@@ -71,15 +78,16 @@
     <dl>
         <dt>{% trans "System Info" %}</dt>
         <dd><% if (is_pro) { %>
-                {% trans "Professional Edition" %}
-                <% if (with_license) { %>
-                    {% trans "licensed to" %} <%- license_to %>
-                    ,
-                    {% trans "expires on" %} <%- license_expiration %>
-                <% } %>
+            {% trans "Professional Edition" %}
+            <% if (with_license) { %>
+            {% trans "licensed to" %} <%- license_to %>
+            ,
+            {% trans "expires on" %} <%- license_expiration %>
+            <% } %>
             <% } else { %>
             {% trans "Community Edition" %}
-            <a href="http://manual.seafile.com/deploy_pro/migrate_from_seafile_community_server.html" target="_blank">{% trans "Upgrade to Pro Edition" %}</a>
+            <a href="http://manual.seafile.com/deploy_pro/migrate_from_seafile_community_server.html"
+               target="_blank">{% trans "Upgrade to Pro Edition" %}</a>
             <% } %>
         </dd>
 
@@ -94,9 +102,9 @@
             <%- users_count %>
             /
             <% if (with_license) { %>
-                <%- license_maxusers %>
+            <%- license_maxusers %>
             <% } else { %>
-                --
+            --
             <% } %>
         </dd>
         <% } else { %>
@@ -119,7 +127,7 @@
 </script>
 
 <script type="text/template" id="admin-devices-tmpl">
-    <div class="hd ovhd">
+    <div class="mui-panel">
         <ul class="tab-tabs-nav fleft">
             <li class="tab <% if (cur_tab == 'desktop') { %> ui-state-active <% } %>">
                 <a href="#desktop-devices/" class="a">{% trans "Desktop" %}</a>
@@ -136,14 +144,14 @@
     </div>
     <table class="hide">
         <thead>
-            <tr>
-                <th width="22%">{% trans "User" %}</th>
-                <th width="17%">{% trans "Platform" %} / {% trans "Version" %}</th>
-                <th width="22%">{% trans "Device Name" %}</th>
-                <th width="17%">{% trans "IP" %}</th>
-                <th width="17%">{% trans "Last Access" %}</th>
-                <th width="5%"></th>
-            </tr>
+        <tr>
+            <th width="22%">{% trans "User" %}</th>
+            <th width="17%">{% trans "Platform" %} / {% trans "Version" %}</th>
+            <th width="22%">{% trans "Device Name" %}</th>
+            <th width="17%">{% trans "IP" %}</th>
+            <th width="17%">{% trans "Last Access" %}</th>
+            <th width="5%"></th>
+        </tr>
         </thead>
         <tbody>
         </tbody>
@@ -163,7 +171,9 @@
     <td><%- platform %> / <%- client_version %></td>
     <td><%- device_name %></td>
     <td><%- last_login_ip %></td>
-    <td><time title='<%- time %>'><%- time_from_now %></time></td>
+    <td>
+        <time title='<%- time %>'><%- time_from_now %></time>
+    </td>
     <td>
         <div>
             <span class="unlink-device op-icon sf2-icon-delete vh" title="{% trans "Unlink" %}"></span>
@@ -172,7 +182,7 @@
 </script>
 
 <script type="text/template" id="admin-device-errors-tmpl">
-    <div class="hd ovhd">
+    <div class="mui-panel">
         <ul class="tab-tabs-nav fleft">
             <li class="tab <% if (cur_tab == 'desktop') { %> ui-state-active <% } %>">
                 <a href="#desktop-devices/" class="a">{% trans "Desktop" %}</a>
@@ -188,14 +198,14 @@
     </div>
     <table class="hide">
         <thead>
-            <tr>
-                <th width="15%">{% trans "User" %}</th>
-                <th width="17%">{% trans "Device" %} / {% trans "Version" %}</th>
-                <th width="18%">{% trans "IP" %}</th>
-                <th width="15%">{% trans "Library" %}</th>
-                <th width="17%">{% trans "Error" %}</th>
-                <th width="18%">{% trans "Time" %}</th>
-            </tr>
+        <tr>
+            <th width="15%">{% trans "User" %}</th>
+            <th width="17%">{% trans "Device" %} / {% trans "Version" %}</th>
+            <th width="18%">{% trans "IP" %}</th>
+            <th width="15%">{% trans "Library" %}</th>
+            <th width="17%">{% trans "Error" %}</th>
+            <th width="18%">{% trans "Time" %}</th>
+        </tr>
         </thead>
         <tbody>
         </tbody>
@@ -216,16 +226,20 @@
         <a href="{{ SITE_ROOT }}sys/seafadmin/repo/<%- repo_id %>/"><%- repo_name %></a>
     </td>
     <td><%- error_msg %></td>
-    <td><time title='<%- time %>'><%- time_from_now %></time></td>
+    <td>
+        <time title='<%- time %>'><%- time_from_now %></time>
+    </td>
 </script>
 
 <script type="text/template" id="user-info-popup-tmpl">
-    <div class="outer-caret up-outer-caret"><div class="inner-caret"></div></div>
+    <div class="outer-caret up-outer-caret">
+        <div class="inner-caret"></div>
+    </div>
     <div class="popover-con">
         <div class="item ovhd">
             {% avatar request.user 36 %}
             <div class="txt">
-                <%- app.pageOptions.name %><br />
+                <%- app.pageOptions.name %><br/>
                 <%- app.pageOptions.contact_email %>
             </div>
         </div>

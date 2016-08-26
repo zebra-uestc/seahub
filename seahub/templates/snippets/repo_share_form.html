@@ -1,5 +1,6 @@
 {% load i18n %}
-<form id="repo-share-form" action="{{ post_url }}" method="post" name="repo-share-form" class="tab-popup hide">{% csrf_token %}
+<form id="repo-share-form" action="{{ post_url }}" method="post" name="repo-share-form"
+      class="tab-popup hide">{% csrf_token %}
     <h3 class="hd">{% trans "Share %(lib_name)s" %}</h3>
     <div id="repo-share-tabs" class="tab-popup-tabs">
         <ul class="tab-popup-tabs-nav">
@@ -8,13 +9,14 @@
             <li class="tab"><a href="#share-contact-options" class="a">{% trans 'Contacts' %}</a></li>
         </ul>
         <div id="share-enter">
-            <textarea id="email_or_group" name="email_or_group" placeholder="{% trans "Emails or Groups, Seperated by ','"%}"></textarea>
+            <textarea id="email_or_group" name="email_or_group"
+                      placeholder="{% trans "Emails or Groups, Seperated by ','" %}"></textarea>
             {% if cloud_mode %}
-            {% if org %}
-            <p class="tip">{% trans 'Tip: must be organization members or organization groups, enter "all" to share to public library.' %}</p>
-            {% endif %}
+                {% if org %}
+                    <p class="tip">{% trans 'Tip: must be organization members or organization groups, enter "all" to share to public library.' %}</p>
+                {% endif %}
             {% else %}
-            <p class="tip">{% trans 'Tip: enter "all" to share to public library.' %}</p>
+                <p class="tip">{% trans 'Tip: enter "all" to share to public library.' %}</p>
             {% endif %}
         </div>
         <div id="share-grp-options" class="hide"></div>
@@ -22,11 +24,11 @@
     </div>
     <div class="bot">
         <select name="permission" class="share-permission-select w100">
-            <option value="rw" selected="selected">{% trans "Read-Write"%}</option>
-            <option value="r">{% trans "Read-Only"%}</option>
+            <option value="rw" selected="selected">{% trans "Read-Write" %}</option>
+            <option value="r">{% trans "Read-Only" %}</option>
         </select>
-        <input type="hidden" name="repo_id" value="" />
+        <input type="hidden" name="repo_id" value=""/>
         <p class="error hide"></p>
-        <input type="submit" value="{% trans "Submit"%}" id="share-submit-btn" />
+        <input type="submit" value="{% trans "Submit" %}" id="share-submit-btn"/>
     </div>
 </form>

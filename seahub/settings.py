@@ -9,7 +9,7 @@ from seaserv import FILE_SERVER_ROOT, FILE_SERVER_PORT, SERVICE_URL
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), os.pardir)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -655,3 +655,5 @@ CONSTANCE_CONFIG = {
 
     'SHARE_LINK_PASSWORD_MIN_LENGTH': (SHARE_LINK_PASSWORD_MIN_LENGTH,''),
 }
+
+SEAFILE_VERSION = "5.1.4"

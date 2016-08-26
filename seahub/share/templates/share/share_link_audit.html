@@ -3,7 +3,7 @@
 
 {% block main_panel %}
 <div class="new-narrow-panel" role="main">
-    <h2 class="hd">{% trans "Email Verification" %}</h2>
+    <h2 class="mui-panel">{% trans "Email Verification" %}</h2>
     <form action="" method="post" id="link-audit-form" class="con">{% csrf_token %}
         <p class="tip">{% trans "Please provide your email address to continue." %}</p>
         <label for="email">{% trans "Email" %}</label>

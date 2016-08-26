@@ -4,26 +4,30 @@
 {% block nav_orgadmin_class %}class="cur"{% endblock %}
 
 {% block extra_style %}
-<style type="text/css">
-#left-panel { position:relative; }
-#set-quota-form {
-    min-width:255px;
-}
-</style>
+    <style type="text/css">
+        #left-panel {
+            position: relative;
+        }
+
+        #set-quota-form {
+            min-width: 255px;
+        }
+    </style>
 {% endblock %}
 
 {% block left_panel %}
-<a class="go-back" title="{% trans "Back" %}" href="{% url 'sys_inst_admin' %}"><span class="icon-chevron-left"></span></a>
-<div class="side-info">
-    <h3 class="hd"><a href="{% url 'sys_inst_info_users' inst.pk %}">{{ inst.name }}</a></h3>
-    <dl>
-        <dt>{% trans "Number of members" %}</dt>
-        <dd>{{ users_count }}</dd>
-    </dl>
+    <a class="go-back" title="{% trans "Back" %}" href="{% url 'sys_inst_admin' %}"><span
+            class="icon-chevron-left"></span></a>
+    <div class="side-info">
+        <h3 class="hd"><a href="{% url 'sys_inst_info_users' inst.pk %}">{{ inst.name }}</a></h3>
+        <dl>
+            <dt>{% trans "Number of members" %}</dt>
+            <dd>{{ users_count }}</dd>
+        </dl>
 
-    <form action="{% url 'sys_inst_search_user' inst.pk %}" method="get" class="side-search-form">
-        <input type="text" name="q" class="input" value="{{q}}" placeholder="{% trans "Search users..." %}" />
-    </form>
-    
-</div>
+        <form action="{% url 'sys_inst_search_user' inst.pk %}" method="get" class="side-search-form">
+            <input type="text" name="q" class="input" value="{{ q }}" placeholder="{% trans "Search users..." %}"/>
+        </form>
+
+    </div>
 {% endblock %}

@@ -2,38 +2,42 @@
 {% load seahub_tags i18n %}
 {% block cur_users %}tab-cur{% endblock %}
 
-{% block left_panel %}{{block.super}}
-<form action="{% url 'user_search' %}" method="get" class="side-search-form">
-    <input type="text" name="email" class="input" value="" placeholder="{% trans "Search users..." %}" />
-</form>
+{% block left_panel %}{{ block.super }}
+    <form action="{% url 'user_search' %}" method="get" class="side-search-form">
+        <input type="text" name="email" class="input" value="" placeholder="{% trans "Search users..." %}"/>
+    </form>
 {% endblock %}
 
 {% block right_panel %}
-<div class="tabnav ovhd">
-    <ul class="tabnav-tabs fleft">
-        <li class="tabnav-tab"><a href="{% url 'sys_useradmin' %}">{% trans "Database" %}</a></li>
-        {% if have_ldap %}
-        <li class="tabnav-tab"><a href="{% url 'sys_useradmin_ldap' %}">{% trans "LDAP" %}</a></li>
-        <li class="tabnav-tab"><a href="{% url 'sys_useradmin_ldap_imported' %}">{% trans "LDAP(imported)" %}</a></li>
-        {% endif %}
-        <li class="tabnav-tab"><a href="{% url 'sys_useradmin_admins' %}">{% trans "Admins" %}</a></li>
-        {% if enable_user_plan %}
-        <li class="tabnav-tab tabnav-tab-cur"><a href="{% url 'sys_useradmin' %}?filter=paid">Paid</a></li>
-        {% endif %}
-    </ul>
-</div>
+    <div class="mui-panel">
+        <div class="fright">
+            <button id="import-users-btn" class="mui-btn">{% trans "Import users" %}</button>
+            <button id="add-user-btn" class="mui-btn">{% trans "Add user" %}</button>
+            <button id="export-excel" class="mui-btn">{% trans "Export Excel" %}</button>
+        </div>
+        <ul class="mui-tabs__bar">
+            <li><a href="{% url 'sys_useradmin' %}">{% trans "Database" %}</a></li>
+            {% if have_ldap %}
+                <li><a href="{% url 'sys_useradmin_ldap' %}">{% trans "LDAP" %}</a></li>
+                <li><a href="{% url 'sys_useradmin_ldap_imported' %}">{% trans "LDAP(imported)" %}</a></li>
+            {% endif %}
+            <li><a href="{% url 'sys_useradmin_admins' %}">{% trans "Admins" %}</a></li>
+            {% if enable_user_plan %}
+                <li class="mui--is-active"><a href="{% url 'sys_useradmin' %}?filter=paid">Paid</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    {% with is_admin_page=False %}
+        {% include "sysadmin/useradmin_table.html" %}
+    {% endwith %}
 
-{% with is_admin_page=False%}
-{% include "sysadmin/useradmin_table.html" %}
-{% endwith %}
-
-<div id="activate-msg" class="hide">
-    <p>{% trans "Activating..., please wait" %}</p>
-</div>
+    <div id="activate-msg" class="hide">
+        <p>{% trans "Activating..., please wait" %}</p>
+    </div>
 {% endblock %}
 
 {% block extra_script %}
-<script type="text/javascript">
-{% include "sysadmin/useradmin_js.html" %}
-</script>
+    <script type="text/javascript">
+        {% include "sysadmin/useradmin_js.html" %}
+    </script>
 {% endblock %}
